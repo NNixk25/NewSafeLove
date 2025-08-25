@@ -1,0 +1,22 @@
+﻿@using MauiApp1.Models
+<h3>CardComponent</h3>
+
+@if (Items is not null)
+{
+    foreach (var diseases in Items)
+    {
+        <div class="card" style="margin-bottom : 4px; width: 50%;">
+            <div class="card-body">
+                <h5 class="card-title">@diseases.Name</h5>
+                <p class="card-text">อาการ: @diseases.Symptom</p>
+                <p class="card-text">สาเหตุ: @diseases.Cause</p>
+                <p class="card-text">การรักษา: @diseases.Treatment</p>
+            </div>
+        </div>
+    }
+}
+
+
+@code {
+    [Parameter] public IEnumerable<Disease>? Items { get; set; }
+}

@@ -1,0 +1,55 @@
+﻿@page "/diseases"
+@using MauiApp1.Components.Component
+@using MauiApp1.Models
+
+<h3>diseases</h3>
+<CardComponent Items="@_diseases" />
+
+
+
+@code 
+{
+    private List<Disease> _diseases = new()
+       {
+        new Disease 
+        { 
+            Name =  "ซิฟิลิส (Syphilis)",
+            Symptom = "ซิฟิลิสเป็นโรคติดต่อทางเพศที่เกิดจากเชื้อแบคทีเรีย Treponema pallidum มีอาการหลายระยะ เช่น แผลริมแข็ง ผื่นตามร่างกาย หากไม่รักษาอาจลุกลามไปยังระบบประสาทและหัวใจได้",
+            Cause = "Genetic factors, lifestyle choices, obesity",
+            Treatment = "Lifestyle changes, medication, insulin therapy",
+            Prevention = "Healthy diet, regular exercise, maintaining a healthy weight"
+        },
+        new Disease
+        {
+            Name =  "Diabetes",
+            Symptom = "Frequent urination, increased thirst, unexplained weight loss",
+            Cause = "Genetic factors, lifestyle choices, obesity",
+            Treatment = "Lifestyle changes, medication, insulin therapy",
+            Prevention = "Healthy diet, regular exercise, maintaining a healthy weight"
+        },
+        new Disease
+        {
+            Name =  "Diabetes",
+            Symptom = "Frequent urination, increased thirst, unexplained weight loss",
+            Cause = "Genetic factors, lifestyle choices, obesity",
+            Treatment = "Lifestyle changes, medication, insulin therapy",
+            Prevention = "Healthy diet, regular exercise, maintaining a healthy weight"
+        },
+        new Disease
+        {
+            Name =  "Diabetes",
+            Symptom = "Frequent urination, increased thirst, unexplained weight loss",
+            Cause = "Genetic factors, lifestyle choices, obesity",
+            Treatment = "Lifestyle changes, medication, insulin therapy",
+            Prevention = "Healthy diet, regular exercise, maintaining a healthy weight"
+        },
+        new Disease
+        {
+            Name =  "Diabetes",
+            Symptom = "Frequent urination, increased thirst, unexplained weight loss",
+            Cause = "Genetic factors, lifestyle choices, obesity",
+            Treatment = "Lifestyle changes, medication, insulin therapy",
+            Prevention = "Healthy diet, regular exercise, maintaining a healthy weight"
+        },
+    };
+}
