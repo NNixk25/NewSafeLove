@@ -3,15 +3,28 @@
 
 @if (Items is not null)
 {
-    foreach (var diseases in Items)
+    
+    foreach (var pair in Items.Select((d, i) => new { d, i }))
     {
-        <div class="card" style="margin-bottom : 4px; width: 50%;">
+        // ประกาศการจับคู่ id
+        var d = pair.d;
+        var index = pair.i;
+
+        // จับคู่คำอธิบายตาม index (ถ้าจำนวนไม่เท่ากันให้เช็คขอบเขต)
+        DiseaseDescriptions? desc =(index >= 0 && index < _diseasesDescriptions.Count) 
+            ? _diseasesDescriptions[index] 
+            : null;
+
+            var modalId = $"disease-modal-{index}"; // สร้าง ID เฉพาะสำหรับแต่ละโมดัล
+
+
+
+        <div class="card w-auto" style="margin-bottom : 4px;">
             <div class="card-body">
-                <h5 class="card-title">@diseases.Name</h5>
-                <p class="card-text">อาการ: @diseases.Symptom</p>
-                <p class="card-text">สาเหตุ: @diseases.Cause</p>
-                <p class="card-text">การรักษา: @diseases.Treatment</p>
+                <h5 class="card-title">@d.Name</h5>
+                <p class="card-text">อาการ: @d.Symptom</p>
             </div>
+            <ButtonModelComponent ModalId="@modalId" Title="@d.Name" Item="@desc" />
         </div>
     }
 }
@@ -19,4 +32,29 @@
 
 @code {
     [Parameter] public IEnumerable<Disease>? Items { get; set; }
+
+    private readonly List<DiseaseDescriptions> _diseasesDescriptions = new()
+    {
+        new DiseaseDescriptions
+        {
+            Disease_Subcription = "ซิฟิลิสเป็นโรคติดต่อทางเพศที่เกิดจากเชื้อแบคทีเรีย Treponema pallidum มีอาการหลายระยะ เช่น แผลริมแข็ง ผื่นตามร่างกาย หากไม่รักษาอาจลุกลามไปยังระบบประสาทและหัวใจได้",
+            Disease_Cause = "การติดต่อส่วนใหญ่เกิดจากการมีเพศสัมพันธ์โดยไม่ป้องกันกับผู้ติดเชื้อ หรือจากแม่สู่ลูกในครรภ์"
+        },
+        new DiseaseDescriptions
+        {
+            Disease_Subcription = "โรคเบาหวานเป็นภาวะที่ระดับน้ำตาลในเลือดสูงเกินปกติ เนื่องจากร่างกายไม่สามารถผลิตหรือใช้อินซูลินได้อย่างมีประสิทธิภาพ อาการทั่วไป ได้แก่ ปัสสาวะบ่อย กระหายน้ำมาก น้ำหนักลดโดยไม่ทราบสาเหตุ",
+            Disease_Cause = "ปัจจัยเสี่ยงรวมถึงพันธุกรรม การใช้ชีวิตที่ไม่เหมาะสม และโรคอ้วน"
+        },
+        new DiseaseDescriptions
+        {
+            Disease_Subcription = "test3",
+            Disease_Cause = "3"
+        },
+        new DiseaseDescriptions
+        {
+            Disease_Subcription = "test4",
+            Disease_Cause = "4"
+        },
+    };
+   
 }

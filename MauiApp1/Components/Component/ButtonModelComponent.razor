@@ -1,0 +1,31 @@
+﻿@using MauiApp1.Models
+
+
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="@($"#{ModalId}")">
+        Launch demo modal
+    </button>
+   
+    <div class="modal fade" id="@ModalId" tabindex="-1" aria-labelledby="@($"{ModalId}-label")" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="@($"{ModalId}-label")">@Title</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <div class="modal-body">
+                    <p class="card-text">คำอธิบายโรค: @Item?.Disease_Subcription</p>
+                    <p class="card-text">สาเหตุ: @Item?.Disease_Cause</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+@code {
+    [Parameter] public string ModalId { get; set; } = Guid.NewGuid().ToString("N"); // กันชนกัน
+    [Parameter] public string? Title { get; set; }
+    [Parameter] public DiseaseDescriptions? Item { get; set; }
+}
