@@ -3,7 +3,7 @@
 
     <!-- Button trigger modal -->
     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="@($"#{ModalId}")">
-        Launch demo modal
+        แสดงลายละเอียดเพิ่มเติม
     </button>
    
     <div class="modal fade" id="@ModalId" tabindex="-1" aria-labelledby="@($"{ModalId}-label")" aria-hidden="true">
@@ -17,6 +17,8 @@
                 <div class="modal-body">
                     <p class="card-text">คำอธิบายโรค: @Item?.Disease_Subcription</p>
                     <p class="card-text">สาเหตุ: @Item?.Disease_Cause</p>
+                    <p class="card-text">การรักษา: @Item?.Disease_Treatment</p>
+                    <p class="card-text">การป้องกัน: @Item?.Disease_Prevention</p>
                 </div>
             </div>
         </div>
