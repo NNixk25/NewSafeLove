@@ -1,0 +1,67 @@
+﻿@page "/disease-quiz"
+@using MauiApp1.Models
+
+<div class="card shadow-lg border-0 rounded-4">
+     <div class="card-body p-4">
+        <h2 class="text-center mb-4">📝 แบบทดสอบความรู้</h2>
+@if (!isSubmitted)
+{
+    <EditForm Model="@quizAnswers" OnValidSubmit="SubmitQuiz">
+        <div class="mb-3">
+            <label class="form-label">1. โรคเอดส์ติดต่อผ่านทางใด?</label><br />
+            <InputRadioGroup @bind-Value="quizAnswers.Q1">
+                <InputRadio Value="@("การมีเพศสัมพันธ์โดยไม่ป้องกัน")" /> การมีเพศสัมพันธ์โดยไม่ป้องกัน <br />
+                <InputRadio Value="@("การกินข้าวร่วมกัน")" /> การกินข้าวร่วมกัน <br />
+            </InputRadioGroup>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">2. ควรใช้วิธีใดเพื่อป้องกันโรค?</label><br />
+            <InputRadioGroup @bind-Value="quizAnswers.Q2">
+                <InputRadio Value="@("ใส่ถุงยางอนามัย")" /> ใส่ถุงยางอนามัย <br />
+                <InputRadio Value="@("ดื่มน้ำเยอะๆ")" /> ดื่มน้ำเยอะ ๆ <br />
+            </InputRadioGroup>
+        </div>
+
+       <button class="btn btn-success w-100" type="submit">ส่งคำตอบ</button>
+    </EditForm>
+}
+else
+{
+            <div class="text-center">
+                <h4 class="mb-3">✅ ผลลัพธ์ของคุณ</h4>
+                <div class="alert alert-info shadow-sm rounded-3">
+                    <p>@resultMessage</p>
+                </div>
+                <button class="btn btn-primary" @onclick="RestartQuiz">ลองทำใหม่</button>
+            </div>
+}
+    </div>
+</div>
+@code {
+    private QuizAnswers quizAnswers = new();
+    private bool isSubmitted = false;
+    private string resultMessage = "";
+
+    private void SubmitQuiz()
+    {
+        int score = 0;
+        if (quizAnswers.Q1 == "การมีเพศสัมพันธ์โดยไม่ป้องกัน") score++;
+        if (quizAnswers.Q2 == "ใส่ถุงยางอนามัย") score++;
+        resultMessage = $"คุณทำได้ {score}/2 คะแนน";
+        isSubmitted = true;
+    }
+
+    private void RestartQuiz()
+    {
+        quizAnswers = new();     // reset คำตอบใหม่
+        isSubmitted = false;     // กลับไปหน้าแบบทดสอบ
+        resultMessage = "";
+    }
+
+    public class QuizAnswers
+    {
+        public string? Q1 { get; set; }
+        public string? Q2 { get; set; }
+    }
+}

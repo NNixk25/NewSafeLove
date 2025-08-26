@@ -1,0 +1,19 @@
+﻿@page "/map"
+
+<div class="card shadow-lg border-0 rounded-4">
+    <div class="card-body p-4 text-center">
+        <h2 class="mb-4">🗺️ สถานพยาบาลใกล้คุณ</h2>
+        <p class="text-muted">ค้นหาสถานที่ตรวจโรคติดต่อทางเพศสัมพันธ์ใกล้บ้านคุณ</p>
+
+        <div style="width:100%; height:500px;" class="rounded-4 overflow-hidden shadow-sm">
+            <iframe width="100%"
+                    height="100%"
+                    style="border:0"
+                    loading="lazy"
+                    allowfullscreen
+                    referrerpolicy="no-referrer-when-downgrade"
+                    src="https://www.google.com/maps/embed/v1/search?key=YOUR_API_KEY&q=คลินิก+ตรวจโรคติดต่อ">
+            </iframe>
+        </div>
+    </div>
+</div>

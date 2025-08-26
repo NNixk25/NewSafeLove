@@ -1,0 +1,57 @@
+﻿@page "/self-check"
+
+<div class="card shadow-lg border-0 rounded-4">
+    <div class="card-body p-4">
+        <h2 class="text-center mb-4">🔍 แบบประเมินความเสี่ยงส่วนตัว</h2>
+
+        <EditForm Model="@checkModel" OnValidSubmit="CheckRisk">
+            <div class="mb-3">
+                <label class="form-label">คุณมีเพศสัมพันธ์โดยไม่ป้องกันหรือไม่?</label>
+                <InputRadioGroup @bind-Value="checkModel.NoCondom">
+                    <div><InputRadio Value="@("Yes")" /> ใช่</div>
+                    <div><InputRadio Value="@("No")" /> ไม่ใช่</div>
+                </InputRadioGroup>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">คุณมีคู่นอนหลายคนหรือไม่?</label>
+                <InputRadioGroup @bind-Value="checkModel.MultiPartner">
+                    <div><InputRadio Value="@("Yes")" /> ใช่</div>
+                    <div><InputRadio Value="@("No")" /> ไม่ใช่</div>
+                </InputRadioGroup>
+            </div>
+
+            <button class="btn btn-warning w-100" type="submit">ตรวจสอบ</button>
+        </EditForm>
+
+        @if (isChecked)
+        {
+            <div class="alert @(isHighRisk ? "alert-danger" : "alert-success") mt-4 rounded-3 shadow-sm">
+                <h5>ผลการประเมิน:</h5>
+                <p>@riskResult</p>
+            </div>
+        }
+    </div>
+</div>
+
+@code {
+    private SelfCheckModel checkModel = new();
+    private bool isChecked = false;
+    private bool isHighRisk = false;
+    private string riskResult = "";
+
+    private void CheckRisk()
+    {
+        isChecked = true;
+        isHighRisk = checkModel.NoCondom == "Yes" || checkModel.MultiPartner == "Yes";
+        riskResult = isHighRisk
+            ? "⚠️ คุณอาจมีความเสี่ยงสูง ควรไปพบแพทย์เพื่อตรวจเพิ่มเติม"
+            : "✅ ความเสี่ยงต่ำ แต่ควรตรวจสุขภาพประจำปี";
+    }
+
+    public class SelfCheckModel
+    {
+        public string? NoCondom { get; set; }
+        public string? MultiPartner { get; set; }
+    }
+}

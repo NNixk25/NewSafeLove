@@ -1,17 +1,34 @@
 ﻿@inherits LayoutComponentBase
 
-<div class="page">
-    <div class="sidebar">
-        <NavMenu />
+<div class="d-flex flex-column min-vh-100">
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="/">SaveLove</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="/">🏠 หน้าแรก</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/disease-quiz">📝 แบบทดสอบ</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/self-check">🔍 ตรวจเช็ค</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/map">🗺️ แผนที่</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Content -->
+    <div class="flex-grow-1">
+        <div class="container py-5">
+            @Body
+        </div>
     </div>
 
-    <main>
-        <div class="top-row px-4">
-            <a href="https://learn.microsoft.com/aspnet/core/" target="_blank">About</a>
-        </div>
-
-        <article class="content px-4">
-            @Body
-        </article>
-    </main>
+    <!-- Footer -->
+    <footer class="bg-light text-center py-3 mt-auto border-top">
+        <small class="text-muted">© 2025 SafeLove - ให้ความรู้และป้องกันโรคติดต่อทางเพศสัมพันธ์</small>
+    </footer>
 </div>
