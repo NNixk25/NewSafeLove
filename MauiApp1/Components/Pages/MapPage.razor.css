@@ -1,0 +1,57 @@
+.pastel-bg {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #fdfbfb, #f1f5f9);
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 30px;
+}
+
+/* ?????????????? */
+.hospital-card {
+    background: #fffdfd;
+    border: 1px solid #f0f0f0;
+}
+
+/* ??????????????? */
+.hospital-info {
+    background: #fefefe;
+    border: 1px solid #f2f2f2;
+}
+
+/* ????????????? */
+.btn-pastel {
+    display: inline-block;
+    padding: 10px 20px;
+    background: #a5d8ff; /* ????????? */
+    border-radius: 12px;
+    color: #004085;
+    font-weight: 600;
+    text-decoration: none;
+    transition: 0.3s ease;
+    border: none;
+}
+
+    .btn-pastel:hover {
+        background: #74c0fc;
+        color: #fff;
+    }
+
+/* Title ???????????? */
+.title {
+    color: #e599f7;
+}
+.btn-submit {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 12px 25px;
+    background: #ff99cc;
+    border: none;
+    border-radius: 12px;
+    color: #fff !important;
+    font-weight: bold;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+    text-decoration: none;
+}

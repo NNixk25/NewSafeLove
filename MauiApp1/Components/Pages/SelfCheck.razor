@@ -1,57 +1,92 @@
 ﻿@page "/self-check"
-
-<div class="card shadow-lg border-0 rounded-4">
-    <div class="card-body p-4">
-        <h2 class="text-center mb-4">🔍 แบบประเมินความเสี่ยงส่วนตัว</h2>
-
-        <EditForm Model="@checkModel" OnValidSubmit="CheckRisk">
-            <div class="mb-3">
-                <label class="form-label">คุณมีเพศสัมพันธ์โดยไม่ป้องกันหรือไม่?</label>
-                <InputRadioGroup @bind-Value="checkModel.NoCondom">
-                    <div><InputRadio Value="@("Yes")" /> ใช่</div>
-                    <div><InputRadio Value="@("No")" /> ไม่ใช่</div>
-                </InputRadioGroup>
+<body>
+<div class="page-wrapper">
+    <div class="card">
+        <h2 class="title">🔍 แบบประเมินความเสี่ยงส่วนตัว</h2>
+    <form id="riskForm">
+        <!-- คำถาม 1 -->
+            <div class="question">
+                <label>1. คุณเคยมีเพศสัมพันธ์โดยไม่ใช้ถุงยางอนามัยหรือไม่?</label>
+                <select name="q1">
+                    <option value="0">ไม่เคย</option>
+                    <option value="1">บางครั้ง</option>
+                    <option value="2">บ่อยครั้ง</option>
+                </select>
             </div>
 
-            <div class="mb-3">
-                <label class="form-label">คุณมีคู่นอนหลายคนหรือไม่?</label>
-                <InputRadioGroup @bind-Value="checkModel.MultiPartner">
-                    <div><InputRadio Value="@("Yes")" /> ใช่</div>
-                    <div><InputRadio Value="@("No")" /> ไม่ใช่</div>
-                </InputRadioGroup>
+        <!-- คำถาม 2 -->
+            <div class="question">
+                <label>2. มีคู่นอนหลายคนในช่วง 6 เดือนที่ผ่านมา?</label>
+                <select name="q2">
+                    <option value="0">ไม่มี</option>
+                    <option value="1">1-2 คน</option>
+                    <option value="2">มากกว่า 2 คน</option>
+                </select>
             </div>
 
-            <button class="btn btn-warning w-100" type="submit">ตรวจสอบ</button>
-        </EditForm>
 
-        @if (isChecked)
-        {
-            <div class="alert @(isHighRisk ? "alert-danger" : "alert-success") mt-4 rounded-3 shadow-sm">
-                <h5>ผลการประเมิน:</h5>
-                <p>@riskResult</p>
+        <!-- คำถาม 3 -->
+            <div class="question">
+                <label>3. คุณหรือคู่ของคุณเคยติดโรคติดต่อทางเพศหรือไม่?</label>
+                <select name="q3">
+                    <option value="0">ไม่เคย</option>
+                    <option value="2">เคย</option>
+                </select>
             </div>
-        }
+
+        <!-- คำถาม 4 -->
+            <div class="question">
+                <label>4. มีอาการผิดปกติ เช่น แผล ตกขาวผิดปกติ คัน หรือปัสสาวะแสบ?</label>
+                <select name="q4">
+                    <option value="0">ไม่มี</option>
+                    <option value="2">มี</option>
+                </select>
+            </div>
+
+        <!-- คำถาม 5 -->
+            <div class="question">
+                <label>5. เคยใช้เข็มฉีดยาร่วมกับผู้อื่นหรือไม่?</label>
+                <select name="q5">
+                    <option value="0">ไม่เคย</option>
+                    <option value="2">เคย</option>
+                </select>
+            </div>
+
+            <button type="button" onclick="calculateRisk()" class="btn-submit">ประเมินความเสี่ยง</button>
+    </form>
+
+        <div id="result" class="result"></div>
+
+
+        <a href="/"><button class="btn-back">กลับหน้าหลัก</button></a>
     </div>
 </div>
 
-@code {
-    private SelfCheckModel checkModel = new();
-    private bool isChecked = false;
-    private bool isHighRisk = false;
-    private string riskResult = "";
+<script>
+    function calculateRisk() {
+      const form = document.getElementById("riskForm");
+      const selects = form.querySelectorAll("select");
+      let totalScore = 0;
 
-    private void CheckRisk()
-    {
-        isChecked = true;
-        isHighRisk = checkModel.NoCondom == "Yes" || checkModel.MultiPartner == "Yes";
-        riskResult = isHighRisk
-            ? "⚠️ คุณอาจมีความเสี่ยงสูง ควรไปพบแพทย์เพื่อตรวจเพิ่มเติม"
-            : "✅ ความเสี่ยงต่ำ แต่ควรตรวจสุขภาพประจำปี";
-    }
+      selects.forEach(select => {
+        totalScore += parseInt(select.value);
+      });
 
-    public class SelfCheckModel
-    {
-        public string? NoCondom { get; set; }
-        public string? MultiPartner { get; set; }
+      const result = document.getElementById("result");
+
+      if (totalScore <= 2) {
+        result.textContent = "✅ คุณมีความเสี่ยงต่ำ โปรดรักษาสุขภาพและป้องกันเสมอ";
+        result.style.color = "#28a745";
+      } else if (totalScore <= 5) {
+        result.textContent = "⚠️ คุณมีความเสี่ยงปานกลาง แนะนำให้พบแพทย์เพื่อตรวจเพิ่มเติม";
+        result.style.color = "#ff9800";
+      } else {
+        result.textContent = "🚨 คุณมีความเสี่ยงสูง ควรเข้ารับการตรวจโดยแพทย์โดยเร็วที่สุด";
+        result.style.color = "#e53935";
+      }
     }
-}
+</script>
+</body>
+<div class="text-center mt-4">
+    <a href="/" class="btn-submit">⬅️ กลับหน้าแรก</a>
+</div>

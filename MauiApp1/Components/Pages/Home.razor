@@ -1,55 +1,60 @@
 ﻿@page "/"
 @using MauiApp1.Models
 
-<div class="text-center mb-5">
-    <h1 class="fw-bold">📌 ยินดีต้อนรับสู่ SaveLove</h1>
-    <p class="text-muted">เรียนรู้และป้องกันโรคติดต่อทางเพศสัมพันธ์ เพื่อสุขภาพที่ปลอดภัย</p>
+<div class="page-wrapper">
+    <div class="text-center mb-5">
+        <h1 class="fw-bold title">📌 ยินดีต้อนรับสู่ SafeLove</h1>
+        <p class="subtitle">เรียนรู้และป้องกันโรคติดต่อทางเพศสัมพันธ์ เพื่อสุขภาพที่ปลอดภัย</p>
+    </div>
 </div>
 
-<div class="row g-4">
-    <div class="col-md-3">
-        <div class="card shadow-sm border-0 rounded-4 h-100">
-            <div class="card-body text-center">
-                <h5 class="fw-bold">ℹ️ ข้อมูลพื้นฐาน</h5>
+<div class="container">
+    <div class="row g-4 justify-content-center">
+
+        <div class="col-md-4 col-lg-3">
+            <div class="card h-100 text-center">
+                <div class="emoji">ℹ️</div>
+                <h5 class="fw-bold">ข้อมูลพื้นฐาน</h5>
                 <p class="text-muted">เรียนรู้เกี่ยวกับโรคติดต่อทางเพศสัมพันธ์เบื้องต้น</p>
-                <a href="/basic" class="btn btn-primary">อ่านเพิ่มเติม</a>
+                <a href="/basic" class="btn-submit">อ่านเพิ่มเติม</a>
             </div>
         </div>
-    </div>
-    <div class="col-md-3">
-        <div class="card shadow-sm border-0 rounded-4 h-100">
-            <div class="card-body text-center">
-                <h5 class="fw-bold">🦠 โรคต่าง ๆ</h5>
+
+        <div class="col-md-4 col-lg-3">
+            <div class="card h-100 text-center">
+                <div class="emoji">🦠</div>
+                <h5 class="fw-bold">โรคต่าง ๆ</h5>
                 <p class="text-muted">รายละเอียดโรค สาเหตุ อาการ และวิธีรักษา</p>
-                <a href="/diseases" class="btn btn-primary">ดูโรคทั้งหมด</a>
+                <a href="/diseases" class="btn-submit">ดูโรคทั้งหมด</a>
             </div>
         </div>
-    </div>
-    <div class="col-md-3">
-        <div class="card shadow-sm border-0 rounded-4 h-100">
-            <div class="card-body text-center">
-                <h5 class="fw-bold">📝 แบบทดสอบ</h5>
+
+        <div class="col-md-4 col-lg-3">
+            <div class="card h-100 text-center">
+                <div class="emoji">📝</div>
+                <h5 class="fw-bold">แบบทดสอบ</h5>
                 <p class="text-muted">ตรวจสอบความรู้เรื่องโรคติดต่อ</p>
-                <a href="/disease-quiz" class="btn btn-primary">เริ่มทำ</a>
+                <a href="/disease-quiz" class="btn-submit">เริ่มทำ</a>
             </div>
         </div>
-    </div>
-    <div class="col-md-3">
-        <div class="card shadow-sm border-0 rounded-4 h-100">
-            <div class="card-body text-center">
-                <h5 class="fw-bold">🔍 ตรวจเช็ค</h5>
+
+        <div class="col-md-4 col-lg-3">
+            <div class="card h-100 text-center">
+                <div class="emoji">🔍</div>
+                <h5 class="fw-bold">ตรวจเช็ค</h5>
                 <p class="text-muted">ประเมินความเสี่ยงของคุณ</p>
-                <a href="/self-check" class="btn btn-primary">ตรวจสอบ</a>
+                <a href="/self-check" class="btn-submit">ตรวจสอบ</a>
             </div>
         </div>
-    </div>
-    <div class="col-md-3">
-        <div class="card shadow-sm border-0 rounded-4 h-100">
-            <div class="card-body text-center">
-                <h5 class="fw-bold">🔍 แผนที่</h5>
-                <p class="text-muted">สถานที่ให้บรการ</p>
-                <a href="/map" class="btn btn-primary">กดเลย</a>
+
+        <div class="col-md-4 col-lg-3">
+            <div class="card h-100 text-center">
+                <div class="emoji">🗺️</div>
+                <h5 class="fw-bold">แผนที่</h5>
+                <p class="text-muted">สถานที่ให้บริการ</p>
+                <a href="/map" class="btn-submit">กดเลย</a>
             </div>
         </div>
+
     </div>
 </div>

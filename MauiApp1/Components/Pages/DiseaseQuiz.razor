@@ -1,67 +1,89 @@
 ﻿@page "/disease-quiz"
-@using MauiApp1.Models
 
 <div class="card shadow-lg border-0 rounded-4">
-     <div class="card-body p-4">
+    <div class="card-body p-4">
         <h2 class="text-center mb-4">📝 แบบทดสอบความรู้</h2>
-@if (!isSubmitted)
-{
-    <EditForm Model="@quizAnswers" OnValidSubmit="SubmitQuiz">
-        <div class="mb-3">
-            <label class="form-label">1. โรคเอดส์ติดต่อผ่านทางใด?</label><br />
-            <InputRadioGroup @bind-Value="quizAnswers.Q1">
-                <InputRadio Value="@("การมีเพศสัมพันธ์โดยไม่ป้องกัน")" /> การมีเพศสัมพันธ์โดยไม่ป้องกัน <br />
-                <InputRadio Value="@("การกินข้าวร่วมกัน")" /> การกินข้าวร่วมกัน <br />
-            </InputRadioGroup>
-        </div>
 
-        <div class="mb-3">
-            <label class="form-label">2. ควรใช้วิธีใดเพื่อป้องกันโรค?</label><br />
-            <InputRadioGroup @bind-Value="quizAnswers.Q2">
-                <InputRadio Value="@("ใส่ถุงยางอนามัย")" /> ใส่ถุงยางอนามัย <br />
-                <InputRadio Value="@("ดื่มน้ำเยอะๆ")" /> ดื่มน้ำเยอะ ๆ <br />
-            </InputRadioGroup>
-        </div>
+        @if (!quizFinished)
+        {
+            <div>
+                <h5>@questions[currentIndex].Text</h5>
 
-       <button class="btn btn-success w-100" type="submit">ส่งคำตอบ</button>
-    </EditForm>
-}
-else
-{
-            <div class="text-center">
-                <h4 class="mb-3">✅ ผลลัพธ์ของคุณ</h4>
-                <div class="alert alert-info shadow-sm rounded-3">
-                    <p>@resultMessage</p>
-                </div>
-                <button class="btn btn-primary" @onclick="RestartQuiz">ลองทำใหม่</button>
+                @foreach (var option in questions[currentIndex].Options)
+                {
+                    <button class="btn btn-outline-dark w-100 my-2"
+                            @onclick="() => SelectAnswer(option)">
+                        @option
+                    </button>
+                }
             </div>
-}
+        }
+        else
+        {
+            <div class="text-center">
+                <h4>🎉 คุณทำแบบทดสอบเสร็จแล้ว!</h4>
+                <p>ได้คะแนน <b>@score</b> / @questions.Count</p>
+                <button class="btn btn-primary mt-3" @onclick="RestartQuiz">เริ่มใหม่</button>
+            </div>
+        }
     </div>
 </div>
-@code {
-    private QuizAnswers quizAnswers = new();
-    private bool isSubmitted = false;
-    private string resultMessage = "";
 
-    private void SubmitQuiz()
+@code {
+    private class Question
     {
-        int score = 0;
-        if (quizAnswers.Q1 == "การมีเพศสัมพันธ์โดยไม่ป้องกัน") score++;
-        if (quizAnswers.Q2 == "ใส่ถุงยางอนามัย") score++;
-        resultMessage = $"คุณทำได้ {score}/2 คะแนน";
-        isSubmitted = true;
+        public string Text { get; set; } = "";
+        public List<string> Options { get; set; } = new();
+        public string CorrectAnswer { get; set; } = "";
+    }
+
+    private List<Question> questions = new()
+    {
+        new Question {
+            Text = "โรคเอดส์เกิดจากเชื้ออะไร?",
+            Options = new() { "HIV", "HBV", "HCV", "ไข้หวัดใหญ่" },
+            CorrectAnswer = "HIV"
+        },
+        new Question {
+            Text = "การใช้ถุงยางอนามัยช่วยป้องกันโรคติดต่อทางเพศสัมพันธ์ได้หรือไม่?",
+            Options = new() { "ได้", "ไม่ได้" },
+            CorrectAnswer = "ได้"
+        },
+        new Question {
+            Text = "โรคติดต่อทางเพศสัมพันธ์ใดรักษาไม่หายขาด?",
+            Options = new() { "หนองใน", "ซิฟิลิส", "เริม", "หนองในเทียม" },
+            CorrectAnswer = "เริม"
+        }
+    };
+
+    private int currentIndex = 0;
+    private int score = 0;
+    private bool quizFinished = false;
+
+    private void SelectAnswer(string selected)
+    {
+        if (selected == questions[currentIndex].CorrectAnswer)
+        {
+            score++;
+        }
+
+        if (currentIndex < questions.Count - 1)
+        {
+            currentIndex++;
+        }
+        else
+        {
+            quizFinished = true;
+        }
     }
 
     private void RestartQuiz()
     {
-        quizAnswers = new();     // reset คำตอบใหม่
-        isSubmitted = false;     // กลับไปหน้าแบบทดสอบ
-        resultMessage = "";
-    }
-
-    public class QuizAnswers
-    {
-        public string? Q1 { get; set; }
-        public string? Q2 { get; set; }
+        currentIndex = 0;
+        score = 0;
+        quizFinished = false;
     }
 }
+<div class="text-center mt-4">
+    <a href="/" class="btn-submit">⬅️ กลับหน้าแรก</a>
+</div>
