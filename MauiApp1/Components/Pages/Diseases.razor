@@ -2,8 +2,16 @@
 @using MauiApp1.Components.Component
 @using MauiApp1.Models
 
-<h3>diseases</h3>
-<CardComponent Items="@_diseases" />
+<div class="page-wrapper">
+    <h2 class="title text-center">โรคติดต่อทางเพศสัมพันธ์</h2>
+    <p class="subtitle text-center mb-5">
+        รวบรวมข้อมูลโรค อาการ สาเหตุ และการป้องกัน เพื่อสุขภาพที่ปลอดภัย
+    </p>
+
+    <div class="row g-4">
+        <CardComponent Items="@_diseases" />
+    </div>
+</div>
 
 @code 
 {
@@ -27,7 +35,7 @@
         new Disease
         {
             Name =  "หนองในแท้ (Gonorrhea)",
-            Symptom = "เกิดจากเชื้อแบคทีเรีย Neisseria gonorrhoeae มีอาการปัสสาวะแสบขัด ตกขาวผิดปกติ อาจไม่มีอาการในผู้หญิง หากปล่อยไว้อาจทำให้เป็นหมันได้",
+            Symptom = "เกิดจากเชื้อแบคทีเรีย Neisseria gonorrhoeae โรคหนองในอาจไม่มีอาการแสดง อาการแสดงอาจมีหลากหลายขึ้นกับตำแหน่งหรืออวัยวะที่มีการติดเชื้อ เช่น ท่อปัสสาวะ บริเวณอวัยวะสืบพันธุ์  และทวารหนัก",
         },
 
 
@@ -35,3 +43,30 @@
 
     
 }
+<div class="text-center mt-4">
+    <a href="/" class="btn-submit">⬅️ กลับหน้าแรก</a>
+</div>
+
+    <style>
+    .btn-submit {
+        display: inline-block;
+        margin-top: 15px;
+        padding: 10px 0;
+        width: 100%;
+        background: #ff4da6;
+        border: none;
+        border-radius: 10px;
+        color: #fff !important;
+        font-weight: 600;
+        font-size: 15px;
+        cursor: pointer;
+        transition: background 0.3s ease;
+        text-decoration: none;
+    }
+
+        .btn-submit:hover {
+            background: #e63399;
+        }
+
+
+    </style>

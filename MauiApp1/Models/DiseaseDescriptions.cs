@@ -12,5 +12,6 @@ namespace MauiApp1.Models
         public string? Disease_Cause { get; set; } //สาเหตุ
         public string? Disease_Treatment { get; set; } //การรักษา
         public string? Disease_Prevention { get; set; } //การป้องกัน
+        public string? VideoUrl { get; set; }
     }
 }

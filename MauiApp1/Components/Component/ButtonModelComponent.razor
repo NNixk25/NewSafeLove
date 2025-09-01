@@ -1,30 +1,36 @@
 ﻿@using MauiApp1.Models
 
 
-    <!-- Button trigger modal -->
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="@($"#{ModalId}")">
-        แสดงลายละเอียดเพิ่มเติม
-    </button>
-   
-    <div class="modal fade" id="@ModalId" tabindex="-1" aria-labelledby="@($"{ModalId}-label")" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="@($"{ModalId}-label")">@Title</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
+<!-- Button trigger modal -->
+<button type="button" class="btn mt-auto fw-semibold btn-disease"
+        data-bs-toggle="modal" data-bs-target="@($"#{ModalId}")">
+    ดูรายละเอียดเพิ่มเติม
+</button>
 
-                <div class="modal-body">
-                    <p class="card-text">คำอธิบายโรค: @Item?.Disease_Subcription</p>
-                    <p class="card-text">สาเหตุ: @Item?.Disease_Cause</p>
-                    <p class="card-text">การรักษา: @Item?.Disease_Treatment</p>
-                    <p class="card-text">การป้องกัน: @Item?.Disease_Prevention</p>
-                </div>
+<div class="modal fade" id="@ModalId" tabindex="-1" aria-labelledby="@($"{ModalId}-label")" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content modal-disease">
+            <div class="modal-header modal-disease-header">
+                <h5 class="modal-title fw-bold" id="@($"{ModalId}-label")">@Title</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+
+
+            <div class="modal-body modal-disease-body">
+                <p><strong>คำอธิบายโรค:</strong> @Item?.Disease_Subcription</p>
+                <p><strong>สาเหตุ:</strong> @Item?.Disease_Cause</p>
+                <p><strong>การรักษา:</strong> @Item?.Disease_Treatment</p>
+                <p><strong>การป้องกัน:</strong> @Item?.Disease_Prevention</p>
+                @if (!string.IsNullOrEmpty(Item?.VideoUrl))
+                {
+                    <div class="ratio ratio-16x9 mt-3">
+                        <iframe src="@Item.VideoUrl" title="Video" frameborder="0" allowfullscreen></iframe>
+                    </div>
+                }
             </div>
         </div>
     </div>
-
-
+</div>
 
 @code {
     [Parameter] public string ModalId { get; set; } = Guid.NewGuid().ToString("N"); // กันชนกัน
