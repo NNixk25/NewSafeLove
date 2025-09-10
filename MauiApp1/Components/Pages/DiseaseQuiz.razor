@@ -42,10 +42,7 @@
         public List<string> Options { get; set; } = new();
         public string CorrectAnswer { get; set; } = "";
 
-        private string GetDebuggerDisplay()
-        {
-            return ToString();
-        }
+        private string GetDebuggerDisplay() => ToString();
     }
 
     private List<Question> questions = new()

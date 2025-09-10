@@ -6,5 +6,6 @@ namespace MauiApp1.Models
     {
         public string Name { get; set; } = "";
         public string? Symptom { get; set; } //อาการ
+        
     }
 }
